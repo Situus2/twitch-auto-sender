@@ -12,7 +12,7 @@
     console.log("Wczytano ustawienia:", config);
   });
 
-  // Dodajemy nasłuchiwanie na zmiany w chrome.storage, aby aktualizować konfigurację w locie
+  // Nasłuchiwanie na zmiany w chrome.storage, aby aktualizować konfigurację w locie
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area === 'sync') {
       for (let key in changes) {
@@ -71,6 +71,11 @@
     chatInput.focus();
     chatInput.click();
 
+    // Obliczanie opóźnienia pomiędzy znakami:
+    // Domyślnie 5ms, ale jeśli dostępny czas (config.interval*1000) podzielony przez długość tekstu
+    // jest mniejszy, to używamy mniejszego opóźnienia, aby zdążyć wpisać całą wiadomość.
+    const typingDelay = text.length ? Math.min(5, (config.interval * 1000) / text.length) : 5;
+
     let index = 0;
     function typeNext() {
       if (index < text.length) {
@@ -102,7 +107,7 @@
         chatInput.dispatchEvent(keyUpEvent);
 
         index++;
-        setTimeout(typeNext, 5); // opóźnienie 100 ms między kolejnymi znakami
+        setTimeout(typeNext, typingDelay);
       } else {
         if (callback) callback();
       }
@@ -177,7 +182,7 @@
       return;
     }
 
-    // Czyścimy pole czatu – zarówno wartość, jak i ewentualny contentEditable
+    // Czyścimy pole czatu – zarówno właściwość value, jak i ewentualny contentEditable
     if ("value" in chatInput) {
       chatInput.value = "";
     } else if (chatInput.isContentEditable) {
@@ -227,7 +232,7 @@
       button.textContent = "Stop Auto Send";
       button.style.backgroundColor = "red";
 
-      // Natychmiast wysyłamy wiadomość oraz ustawiamy interwał wysyłania
+      // Wysyłamy wiadomość natychmiast i ustawiamy interwał wysyłania
       sendMessage();
       autoSendIntervalId = setInterval(sendMessage, config.interval * 1000);
     } else {
@@ -263,6 +268,7 @@
     autoSendButton.style.border = "none";
     autoSendButton.style.padding = "5px 10px";
     autoSendButton.style.cursor = "pointer";
+    autoSendButton.style.borderRadius = "5px"; // zaokrąglone rogi
     autoSendButton.addEventListener("click", () => {
       toggleAutoSend(autoSendButton);
     });

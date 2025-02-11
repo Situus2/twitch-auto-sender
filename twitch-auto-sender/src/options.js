@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Obsługa formularza – zapis ustawień
   document.getElementById('settingsForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    const interval = parseInt(document.getElementById('interval').value, 10) || defaultConfig.interval;
+    const interval = parseFloat(document.getElementById('interval').value) || defaultConfig.interval;
     const alternateModification = document.getElementById('alternateModification').checked;
     const modificationMode = document.getElementById('modificationMode').value;
     const language = document.getElementById('language').value;

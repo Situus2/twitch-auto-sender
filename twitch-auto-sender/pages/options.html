@@ -9,7 +9,8 @@
   <form id="settingsForm">
     <label id="labelInterval">
       <span id="labelIntervalText">Sending interval (seconds):</span>
-      <input type="number" id="interval" name="interval" min="1">
+      <!-- Umożliwiamy wpisywanie wartości zmiennoprzecinkowych -->
+      <input type="number" id="interval" name="interval" min="0.1" step="0.1">
     </label>
     <br><br>
     <label id="labelModifyEveryOther">
@@ -39,3 +40,4 @@
   <script src="../src/options.js"></script>
 </body>
 </html>
+
