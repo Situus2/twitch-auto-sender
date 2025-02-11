@@ -102,7 +102,7 @@
         chatInput.dispatchEvent(keyUpEvent);
 
         index++;
-        setTimeout(typeNext, 100); // opóźnienie 100 ms między kolejnymi znakami
+        setTimeout(typeNext, 5); // opóźnienie 100 ms między kolejnymi znakami
       } else {
         if (callback) callback();
       }
