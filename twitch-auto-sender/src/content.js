@@ -1,15 +1,25 @@
 (function () {
   // Domyślne ustawienia – można je zmienić przez stronę opcji
   const defaultConfig = {
-    interval: 30, // co ile sekund wysyłamy wiadomość
+    interval: 2, // co ile sekund wysyłamy wiadomość
     alternateModification: true, // czy modyfikować co drugą wiadomość
-    modificationMode: "random" // opcje: "random", "duplicate", "underscore"
+    modificationMode: "duplicate" // opcje: "random", "duplicate", "underscore"
   };
 
   let config = defaultConfig;
   chrome.storage.sync.get(defaultConfig, (items) => {
     config = items;
     console.log("Wczytano ustawienia:", config);
+  });
+
+  // Dodajemy nasłuchiwanie na zmiany w chrome.storage, aby aktualizować konfigurację w locie
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'sync') {
+      for (let key in changes) {
+        config[key] = changes[key].newValue;
+      }
+      console.log("Zaktualizowano ustawienia:", config);
+    }
   });
 
   // Identyfikator interwału automatycznego wysyłania

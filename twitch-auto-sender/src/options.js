@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Domyślna konfiguracja
   const defaultConfig = {
-    interval: 30,
+    interval: 2,
     alternateModification: true,
-    modificationMode: "random", // Opcje: "random", "duplicate", "underscore"
+    modificationMode: "duplicate", // Opcje: "random", "duplicate", "underscore"
     language: "en" // Opcje: "en" lub "pl"
   };
 

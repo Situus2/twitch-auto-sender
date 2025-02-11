@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Twitch Chat Auto Sender",
-  "version": "1.0",
+  "version": "1.1.2",
   "description": "Dodaje zielony przycisk do czatu Twitch, wysyłający automatycznie wiadomości.",
   "permissions": ["storage"],
   "content_scripts": [
