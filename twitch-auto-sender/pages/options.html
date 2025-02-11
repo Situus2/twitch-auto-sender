@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title id="pageTitle">Twitch Chat Auto Sender Settings</title>
+</head>
+<body>
+  <h1 id="headerTitle">Twitch Chat Auto Sender Settings</h1>
+  <form id="settingsForm">
+    <label id="labelInterval">
+      <span id="labelIntervalText">Sending interval (seconds):</span>
+      <input type="number" id="interval" name="interval" min="1">
+    </label>
+    <br><br>
+    <label id="labelModifyEveryOther">
+      <span id="labelModifyEveryOtherText">Modify every other message:</span>
+      <input type="checkbox" id="alternateModification" name="alternateModification">
+    </label>
+    <br><br>
+    <label id="labelModificationMode">
+      <span id="labelModificationModeText">Modification mode:</span>
+      <select id="modificationMode" name="modificationMode">
+        <option value="random">Random (random letter or underscore)</option>
+        <option value="duplicate">Duplicate last character</option>
+        <option value="underscore">Append underscore</option>
+      </select>
+    </label>
+    <br><br>
+    <label id="labelLanguage">
+      <span id="labelLanguageText">Language:</span>
+      <select id="language" name="language">
+        <option value="en">English</option>
+        <option value="pl">Polish</option>
+      </select>
+    </label>
+    <br><br>
+    <button type="submit" id="saveButton">Save</button>
+  </form>
+  <script src="../src/options.js"></script>
+</body>
+</html>
